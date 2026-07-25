@@ -1,0 +1,73 @@
+﻿@model Poketext.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">User Profile</h2>
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+
+                        <input type="text"
+                               class="form-control"
+                               value="@Model.Username"
+                               readonly />
+                    </div>
+
+                    <form asp-controller="Profile"
+                          asp-action="UpdateCapturedPokemon"
+                          method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Captured Pokémon
+                            </label>
+
+                            <input type="number"
+                                   name="capturedPokemon"
+                                   class="form-control"
+                                   value="@Model.CapturedPokemon"
+                                   min="0"
+                                   required />
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Save Changes
+                        </button>
+                    </form>
+
+                    <a asp-controller="Account"
+                           asp-action="Logout"
+                           class="btn btn-outline-danger w-100 mt-2">
+                        Logout
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
